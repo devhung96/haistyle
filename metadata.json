@@ -1,0 +1,7 @@
+{
+  "name": "Hairstyle AI",
+  "description": "An application that uses AI to suggest suitable hairstyles based on a photo of your face and your personal preferences.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
