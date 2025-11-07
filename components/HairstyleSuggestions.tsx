@@ -1,7 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import type { Hairstyle } from '../types';
-import { ArrowPathIcon, LightBulbIcon } from './icons';
+import { ArrowPathIcon, LightBulbIcon, SparklesIcon } from './icons';
 import { generateHairstyleImage } from '../services/geminiService';
 import { LoadingSpinner } from './LoadingSpinner';
 
@@ -21,27 +20,33 @@ const ThumbnailSpinner: React.FC = () => (
 export const HairstyleSuggestions: React.FC<HairstyleSuggestionsProps> = ({ suggestions, image, onReset }) => {
   const [hairstyles, setHairstyles] = useState<Hairstyle[]>(suggestions);
   const [selectedHairstyleIndex, setSelectedHairstyleIndex] = useState<number | null>(null);
+  const [generatingIndex, setGeneratingIndex] = useState<number | null>(null);
 
-  useEffect(() => {
-    const generateImages = async () => {
-      for (const [index, style] of suggestions.entries()) {
-        if (!style.imageUrl) {
-            try {
-                const imageUrl = await generateHairstyleImage(image, style);
-                setHairstyles(prevStyles => {
-                    const newStyles = [...prevStyles];
-                    newStyles[index] = { ...newStyles[index], imageUrl };
-                    return newStyles;
-                });
-            } catch (error) {
-                console.error(`Failed to generate image for style ${index}:`, error);
-            }
-        }
-      }
-    };
+  const handleThumbnailClick = async (index: number) => {
+    setSelectedHairstyleIndex(index);
+    
+    const hairstyle = hairstyles[index];
+    // If image is already generated, or another is currently being generated, do nothing.
+    if (hairstyle.imageUrl || generatingIndex !== null) {
+      return;
+    }
 
-    generateImages();
-  }, [suggestions, image]);
+    try {
+      setGeneratingIndex(index);
+      const imageUrl = await generateHairstyleImage(image, hairstyle);
+      setHairstyles(prevStyles => {
+          const newStyles = [...prevStyles];
+          newStyles[index] = { ...newStyles[index], imageUrl };
+          return newStyles;
+      });
+    } catch (error) {
+        console.error(`Failed to generate image for style ${index}:`, error);
+        // You could add an error state here to show a broken image icon in the thumbnail
+    } finally {
+        setGeneratingIndex(null);
+    }
+  };
+
 
   const selectedHairstyle = selectedHairstyleIndex !== null ? hairstyles[selectedHairstyleIndex] : null;
   const displayImage = selectedHairstyle?.imageUrl || image;
@@ -87,7 +92,7 @@ export const HairstyleSuggestions: React.FC<HairstyleSuggestionsProps> = ({ sugg
                      {hairstyles.map((style, index) => (
                         <div 
                             key={index}
-                            onClick={() => setSelectedHairstyleIndex(index)}
+                            onClick={() => handleThumbnailClick(index)}
                             className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer
                                 ${selectedHairstyleIndex === index ? 'border-cyan-400 scale-105' : 'border-gray-600 hover:border-cyan-500/50'}`
                             }
@@ -96,7 +101,7 @@ export const HairstyleSuggestions: React.FC<HairstyleSuggestionsProps> = ({ sugg
                                 <img src={style.imageUrl} alt={style.name} className="w-full h-full object-cover" />
                             ) : (
                                 <div className="w-full h-full bg-gray-700 flex items-center justify-center">
-                                    <ThumbnailSpinner />
+                                    {generatingIndex === index ? <ThumbnailSpinner /> : <SparklesIcon className="w-8 h-8 text-gray-400" />}
                                 </div>
                             )}
                             <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2">
