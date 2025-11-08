@@ -147,9 +147,21 @@ export async function generateHairstyleImage(
     },
   };
 
-  const prompt = `Based on the provided image of a person, realistically edit their hairstyle to be a "${hairstyle.name}". 
-  Hairstyle description: "${hairstyle.description}".
-  Ensure the final image is high quality and that the person's face, expression, and the background remain unchanged. Only alter the hair.`;
+  const prompt = `You are an expert digital artist specializing in photorealistic hair and portrait editing.
+Your task is to edit the provided portrait to give the person a new hairstyle.
+
+**Hairstyle to apply:**
+- **Name:** "${hairstyle.name}"
+- **Description:** "${hairstyle.description}"
+
+**Editing Instructions:**
+1.  **Photorealism is paramount.** The new hairstyle must look completely natural and blend seamlessly with the original photo. Pay close attention to lighting, shadows, hair texture, and individual strands.
+2.  **Preserve Identity:** The person's facial features, skin texture, expression, and head position **must not** be changed. The edit should only affect the hair.
+3.  **Maintain Background:** The background of the original image must remain exactly the same.
+4.  **High-Quality Output:** The final image should be of high resolution and quality, free of digital artifacts or blurring.
+5.  **Seamless Integration:** Ensure the new hairline looks natural and integrates perfectly with the forehead and sides of the face.
+
+Apply the "${hairstyle.name}" hairstyle to the person in the image.`;
 
   try {
     const response = await ai.models.generateContent({
