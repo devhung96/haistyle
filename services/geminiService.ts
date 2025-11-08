@@ -1,6 +1,6 @@
-
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 import type { Preferences, Hairstyle } from "../types";
+import { getPrompts } from '../locales/prompts';
 
 const API_KEY = process.env.API_KEY;
 
@@ -19,9 +19,39 @@ function base64ToGenerativePart(base64: string, mimeType: string) {
   };
 }
 
+export async function analyzeFaceShape(
+  imageDataUrl: string,
+  language: 'en' | 'vi'
+): Promise<string> {
+  const [metadata, base64Data] = imageDataUrl.split(',');
+  if (!base64Data) throw new Error("Invalid image data URL");
+  
+  const mimeType = metadata.match(/:(.*?);/)?.[1];
+  if (!mimeType) throw new Error("Could not determine MIME type from image data URL");
+
+  const imagePart = base64ToGenerativePart(base64Data, mimeType);
+  const prompts = getPrompts(language);
+
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: { parts: [{ text: prompts.faceShape.prompt }, imagePart] },
+      config: {
+        systemInstruction: prompts.faceShape.systemInstruction,
+      },
+    });
+    return response.text.trim();
+  } catch (error) {
+    console.error("Error calling Gemini API for face shape analysis:", error);
+    throw new Error("Failed to analyze face shape from the AI.");
+  }
+}
+
 export async function getHairstyleSuggestions(
   imageDataUrl: string,
-  prefs: Preferences
+  prefs: Preferences,
+  faceShape: string | null,
+  language: 'en' | 'vi'
 ): Promise<Hairstyle[]> {
   const [metadata, base64Data] = imageDataUrl.split(',');
   if (!base64Data) {
@@ -34,12 +64,9 @@ export async function getHairstyleSuggestions(
   }
 
   const imagePart = base64ToGenerativePart(base64Data, mimeType);
-  const prompt = `
-    Based on my preferences below and the attached photo of my face, please suggest 5 hairstyles.
-    - Desired Length: ${prefs.length}
-    - Desired Style: ${prefs.style}
-    - Desired Vibe/Occasion: ${prefs.vibe}
-  `;
+  const prompts = getPrompts(language);
+  
+  const prompt = prompts.suggestions.getPrompt(prefs, faceShape);
 
   try {
     const response = await ai.models.generateContent({
@@ -51,7 +78,7 @@ export async function getHairstyleSuggestions(
         ]
       },
       config: {
-        systemInstruction: `You are an expert virtual hairstylist. Your role is to analyze a person's face from a photo and suggest 5 flattering hairstyles based on their facial features, face shape, and stated preferences. For each suggestion, provide a name for the hairstyle, a brief description, and a clear reason why it's a good match for the user.`,
+        systemInstruction: prompts.suggestions.systemInstruction,
         responseMimeType: "application/json",
         responseSchema: {
           type: Type.OBJECT,
@@ -63,15 +90,15 @@ export async function getHairstyleSuggestions(
                 properties: {
                   name: {
                     type: Type.STRING,
-                    description: "The name of the hairstyle (e.g., 'Classic Bob', 'Textured Pixie Cut')."
+                    description: prompts.suggestions.schema.name
                   },
                   description: {
                     type: Type.STRING,
-                    description: "A short, appealing description of the hairstyle."
+                    description: prompts.suggestions.schema.description
                   },
                   reason: {
                     type: Type.STRING,
-                    description: "A concise explanation of why this hairstyle would suit the person in the photo, mentioning specific facial features if possible."
+                    description: prompts.suggestions.schema.reason
                   }
                 },
                 required: ["name", "description", "reason"]

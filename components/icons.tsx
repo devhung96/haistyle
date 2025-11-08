@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 type IconProps = {
@@ -28,12 +27,24 @@ export const VideoCameraSlashIcon: React.FC<IconProps> = (props) => (
 
 export const ArrowPathIcon: React.FC<IconProps> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.664 0l3.181-3.183m-11.664 0-3.181 3.183m0 0-3.181-3.183m3.181 3.183L12 12.333M12 12.333l3.181 3.183m0 0-3.181-3.183m0 0h4.992m-4.993 0v4.992m0 0-3.181-3.183m0 0 3.181-3.183" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.664 0l3.181-3.183m-11.664 0-3.181 3.183m0 0-3.181-3.183m3.181 3.183L12 12.333M12 12.333l3.181 3.183m0 0-3.181-3.183m0 0h4.992m-4.993 0v4.992m0 0-3.181-3.183m0 0 3.181 3.183" />
     </svg>
 );
 
 export const LightBulbIcon: React.FC<IconProps> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.311a7.5 7.5 0 0 1-7.5 0c.065.21.145.421.24.631a7.5 7.5 0 0 1 7.52 0c.095-.21.175-.421.24-.631M15.25 5.25a3 3 0 0 1-3 3-3 3 0 0 1-3-3m1.5-3v-1.5m0 0a3.75 3.75 0 0 0-3.75 3.75M9.75 9.75c0 .093.01.185.028.275a7.5 7.5 0 0 1 5.444 0c.018-.09.028-.182.028-.275m-5.5 0c0 .093.01.185.028.275a7.5 7.5 0 0 0 5.444 0c.018-.09.028-.182.028-.275" />
+    </svg>
+);
+
+export const ExclamationTriangleIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+    </svg>
+);
+
+export const FaceSmileIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9 9.75h.008v.008H9V9.75Zm6 0h.008v.008H15V9.75Z" />
     </svg>
 );

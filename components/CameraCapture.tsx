@@ -1,5 +1,5 @@
-
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CameraIcon, VideoCameraSlashIcon } from './icons';
 
 interface CameraCaptureProps {
@@ -7,6 +7,7 @@ interface CameraCaptureProps {
 }
 
 export const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture }) => {
+  const { t } = useTranslation();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
@@ -24,9 +25,9 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture }) => {
       setError(null);
     } catch (err) {
       console.error("Error accessing camera:", err);
-      setError("Could not access the camera. Please check your browser permissions.");
+      setError(t('camera.error'));
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     startCamera();
@@ -68,7 +69,7 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture }) => {
         />
         {!stream && !error && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                <p className="text-white">Starting camera...</p>
+                <p className="text-white">{t('camera.starting')}</p>
             </div>
         )}
         {error && (
@@ -85,7 +86,7 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture }) => {
         className="mt-6 flex items-center gap-2 px-8 py-3 bg-cyan-600 text-white font-bold text-lg rounded-full shadow-lg hover:bg-cyan-500 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all transform hover:scale-105"
       >
         <CameraIcon className="w-6 h-6" />
-        <span>Take Photo</span>
+        <span>{t('camera.button')}</span>
       </button>
     </div>
   );

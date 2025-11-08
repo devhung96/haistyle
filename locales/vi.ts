@@ -1,0 +1,56 @@
+export default {
+  "translation": {
+    "app": {
+      "title": "AI Kiểu Tóc",
+      "tagline": "Tìm diện mạo mới của bạn với sức mạnh của AI.",
+      "footer": "Phát triển bởi Gemini. Chỉ dùng cho mục đích giải trí.",
+      "analyzing": "AI đang phân tích hình dạng khuôn mặt của bạn...",
+      "loading": "AI đang phân tích và tìm kiếm những kiểu tóc hoàn hảo..."
+    },
+    "common": {
+      "startOver": "Làm Lại Từ Đầu",
+      "retakePhoto": "Chụp Lại Ảnh"
+    },
+    "camera": {
+      "button": "Chụp Ảnh",
+      "starting": "Đang khởi động camera...",
+      "error": "Không thể truy cập camera. Vui lòng kiểm tra quyền truy cập trên trình duyệt của bạn."
+    },
+    "preferences": {
+      "title": "Cho chúng tôi biết sở thích của bạn",
+      "capturedFaceAlt": "Ảnh đã chụp",
+      "lengthLabel": "Độ dài mong muốn",
+      "anyLength": "Bất kỳ",
+      "short": "Ngắn",
+      "medium": "Vừa",
+      "long": "Dài",
+      "styleLabel": "Kiểu tóc mong muốn",
+      "anyStyle": "Bất kỳ",
+      "straight": "Thẳng",
+      "wavy": "Gợn sóng",
+      "curly": "Xoăn",
+      "coily": "Xoăn tít",
+      "vibeLabel": "Mô tả phong cách bạn muốn",
+      "vibePlaceholder": "VD: công sở, thường ngày, cá tính, dự tiệc",
+      "submitButton": "Nhận Gợi Ý từ AI"
+    },
+    "faceShape": {
+      "title": "Hình Dạng Khuôn Mặt",
+      "analysisFailed": "Không xác định"
+    },
+    "suggestions": {
+      "title": "Bảng Phong Cách AI của Bạn",
+      "subtitle": "Chọn một kiểu bên dưới để thử ngay.",
+      "tryOnAlt": "Ảnh thử kiểu tóc",
+      "generating": "Đang tạo diện mạo mới của bạn...",
+      "generationFailed": "Tạo ảnh thất bại",
+      "whyItWorks": "Lý do phù hợp:",
+      "originalPhoto": "Đây là ảnh gốc của bạn. Nhấn vào một kiểu tóc bên phải để xem điều kỳ diệu!"
+    },
+    "error": {
+      "title": "Đã Có Lỗi Xảy Ra",
+      "noImage": "Chưa có ảnh nào được chụp. Vui lòng quay lại và chụp ảnh.",
+      "unknown": "Đã xảy ra lỗi không xác định khi tạo gợi ý."
+    }
+  }
+}
