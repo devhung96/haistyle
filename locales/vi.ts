@@ -40,12 +40,13 @@ export default {
     },
     "suggestions": {
       "title": "Bảng Phong Cách AI của Bạn",
-      "subtitle": "Chọn một kiểu bên dưới để thử ngay.",
+      "subtitle": "Chọn một kiểu từ băng chuyền bên dưới để thử ngay.",
       "tryOnAlt": "Ảnh thử kiểu tóc",
       "generating": "Đang tạo diện mạo mới của bạn...",
       "generationFailed": "Tạo ảnh thất bại",
       "whyItWorks": "Lý do phù hợp:",
-      "originalPhoto": "Đây là ảnh gốc của bạn. Nhấn vào một kiểu tóc bên phải để xem điều kỳ diệu!"
+      "originalPhoto": "Đây là ảnh gốc của bạn. Chọn một kiểu tóc từ băng chuyền bên dưới để xem điều kỳ diệu!",
+      "originalPhotoLabel": "Ảnh Gốc"
     },
     "error": {
       "title": "Đã Có Lỗi Xảy Ra",

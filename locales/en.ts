@@ -40,12 +40,13 @@ export default {
     },
     "suggestions": {
       "title": "Your AI-Powered Style Board",
-      "subtitle": "Select a style below to virtually try it on.",
+      "subtitle": "Select a style from the carousel to virtually try it on.",
       "tryOnAlt": "Hairstyle try-on",
       "generating": "Generating your new look...",
       "generationFailed": "Generation Failed",
       "whyItWorks": "Why it works:",
-      "originalPhoto": "Your original photo. Click a style on the right to see the magic!"
+      "originalPhoto": "This is your original photo. Select a style from the carousel below to see the magic!",
+      "originalPhotoLabel": "Original"
     },
     "error": {
       "title": "An Error Occurred",
